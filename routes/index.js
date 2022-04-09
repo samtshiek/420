@@ -1,26 +1,15 @@
-var express = require('express');
-var router = express.Router();
-
-router.get('/', function(req, res, next) {
-  res.sendFile('index.html');
-});
-
-module.exports = router;
-
-/*
 const express = require('express');
-const app = express();
-const port = process.env.PORT || 8080;
+const router = express.Router();
 
-// routes will go here
-app.listen(port);
-console.log('Server started at http://localhost:8080' + port);
- router = express.Router();
-
-router.get('/', function(req, res, next) {
-  //res.render('index', { title: 'Express' });
+/* GET users listing */
+router.get('/', function(req, res) {
   res.sendFile('index.html');
 });
 
+router.post('/order', function(req, res) {
+  const order = req.body;
+  console.log(order);
+  res.json(order)
+});
+
 module.exports = router;
-*/

@@ -1,9 +1,4 @@
-var express = require('express');
-var router = express.Router();
-var fs = require("fs");
-var path = require("path");
-
-let cdObject = function (pStoreID, pSalesPersonID, pCdID, pPricePaid, pDate) {
+const cdObject = function (pStoreID, pSalesPersonID, pCdID, pPricePaid, pDate) {
     this.storeID = pStoreID;
     this.salesPersonID = pSalesPersonID;
     this.cdID = pCdID;
@@ -20,12 +15,12 @@ function generateRandomProduct() {
     let date;
 
     // necessary to storeID
-    let cdIdrandom = Math.floor(Math.random() * 10);
-    let pricePaidrandom = Math.floor(Math.random() * 11) + 5;
+    const cdIdrandom = Math.floor(Math.random() * 10);
+    const pricePaidrandom = Math.floor(Math.random() * 11) + 5;
 
     // respective ranges for each random values
-    let storeIDArray = [98053 , 98007, 98077, 98055, 98011, 98046]
-    let cdIdArray = [123456, 123654, 321456, 321654, 654123,
+    const storeIDArray = [98053 , 98007, 98077, 98055, 98011, 98046]
+    const cdIdArray = [123456, 123654, 321456, 321654, 654123,
         654321, 543216, 354126, 621453, 623451]
 
     storeID = storeIDArray[(Math.floor(Math.random() * 6) + 1) - 1]
@@ -55,7 +50,7 @@ function generateRandomProduct() {
     pricePaid = pricePaidrandom;
     date = Date.now();
 
-    let cdProduct = new cdObject(storeID, salesPersonID, cdID, pricePaid, date);
+    const cdProduct = new cdObject(storeID, salesPersonID, cdID, pricePaid, date);
     
     return cdProduct;
 }
@@ -71,8 +66,8 @@ function Sum(currentDate) {
 
 // generate many (500) random product function
 function generateManyRandomProduct(num) {
+    const arr = [];
     let date = new Date();
-    let arr = [];
 
     for (let i = 0; i < num; i++) {
         arr.push(generateRandomProduct(date));
@@ -85,7 +80,7 @@ function generateManyRandomProduct(num) {
 document.addEventListener("DOMContentLoaded", function (event) {
     // when button1 is clicked
     document.getElementById("button1").addEventListener("click", function () {
-        let randomProduct = generateRandomProduct();
+        const randomProduct = generateRandomProduct();
 
         document.getElementById("storeID").innerHTML = randomProduct.storeID;
         document.getElementById("salesPersonID").innerHTML = randomProduct.salesPersonID;
@@ -96,11 +91,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     // when button2 is clicked
     document.getElementById("button2").addEventListener("click", function () {
-        let orderObject = generateRandomProduct();
+        const orderObject = generateRandomProduct();
 
-        fetch('/button2', {
+        fetch('/order', {
             method: "POST",
-            body: JSON.stringify(order),
+            body: JSON.stringify(orderObject),
             headers: {"Content-type": "application/json; charset=UTF-8"}
         })
         .then(response=>response.json())
@@ -110,11 +105,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     // when button3 is clicked
     document.getElementById("button3").addEventListener("click", function () {
-        let order = generateManyRandomProduct(500);
+        const orderObject = generateManyRandomProduct(500);
 
-        fetch('/button3', {
+        fetch('/order', {
             method: "POST",
-            body: JSON.stringify(order),
+            body: JSON.stringify(orderObject),
             headers: {"Content-type": "application/json; charset=UTF-8"}
         })
         .then(response=>response.json())
