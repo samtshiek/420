@@ -1,56 +1,48 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <title>CD product</title>
+        <link rel="stylesheet" href="stylesheets/themes/art-auction.min.css" />
+        <link rel="stylesheet" href="stylesheets/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" /> 
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
+        <script src="javascripts/main.js"></script>
+    </head>
 
-<head>
-    <meta charset="utf-8">
-    <title>CD product</title>
-    <link rel="stylesheet" href="stylesheets/themes/art-auction.min.css" />
-    <link rel="stylesheet" href="stylesheets/themes/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" /> 
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
-    <script src="javascripts/main.js"></script>
+    <body>
+        <!-- ================================================================================ -->
+        <!-- ===========================HOME===================================================== -->
+        <!-- ================================================================================ -->
+        <div data-role="page" id="home">
+            <!-- header -->
+            <div data-role="header" data-theme="a">
+                <div data-role="navbar" data-theme="a">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+                <h2>CD Info</h2>
+            </div>
 
+            <!-- content -->
+            <div data-role="content" data-theme="a" style="text-align: center;">
+            StoreID: <b><p id="storeID">value</p></b>
+            SalesPersonID: <b><p id="salesPersonID">value</p></b>
+            CdID: <b><p id="cdID">value</p></b>
+            PricePaid: <b><p id="pricePaidID">value</p></b>
+            Date: <b><p id="date">timestamp value</p></b>
+            </div>
 
-</head>
+            <input type="button" value="CREATE" id="button1" />
+            <input type="button" value="SUBMIT-ONE" id="button2" />
+            <input type="button" value="SUBMIT500" id="button3" />
 
-<body>
-
-<!-- ================================================================================ -->
-<!-- ===========================HOME===================================================== -->
-<!-- ================================================================================ -->
-<div data-role="page" id="home">
-    <!-- header -->
-    <div data-role="header" data-theme="a">
-        <div data-role="navbar" data-theme="a">
-            <ul>
-                <li><a href="#home">Home</a></li>
-            </ul>
-        </div><!-- /navbar -->
-        <h2>CD Info</h2>
-    </div>
-
-
-
-    <!-- content -->
-    <div data-role="content" data-theme="a" style="text-align: center;">
-    StoreID: <b><p id="storeID">value</p></b>
-    SalesPersonID: <b><p id="salesPersonID">value</p></b>
-    CdID: <b><p id="cdID">value</p></b>
-    PricePaid: <b><p id="pricePaidID">value</p></b>
-    Date: <b><p id="date">timestamp value</p></b>
-    </div>
-
-    <input type="button" value="Button1" id="button1" />
-
-
-    <!-- notes footer -->
-    <div data-role="footer" data-theme="a">
-        <h3>ISIT 420</h3>
-    </div>
-</div>
-
-
-</body>
-
+            <!-- notes footer -->
+            <div data-role="footer" data-theme="a">
+                <h3>ISIT 420</h3>
+            </div>
+        </div>
+    </body>
 </html>
