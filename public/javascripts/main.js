@@ -7,12 +7,11 @@ const cdObject = function (pStoreID, pSalesPersonID, pCdID, pPricePaid, pDate) {
 }
 
 // random values to be stored
-function generateRandomProduct() {
+function generateRandomProduct(date) {
     let storeID;
     let salesPersonID;
     let cdID;
     let pricePaid;
-    let date;
 
     // necessary to storeID
     const cdIdrandom = Math.floor(Math.random() * 10);
@@ -48,26 +47,24 @@ function generateRandomProduct() {
 
     cdID = cdIdArray[cdIdrandom];
     pricePaid = pricePaidrandom;
-    date = Date.now();
 
     const cdProduct = new cdObject(storeID, salesPersonID, cdID, pricePaid, date);
     
     return cdProduct;
 }
 
-// date + 5 to 30 minutes requeriment 
+// date + 5 to 30 minutes requirement 
 function Sum(currentDate) {
-    const randomTime = 5 + Math.floor(Math.random() * 26); // 26 because 0 counts
-    const newDate = new Date();
+    const randomTime = Math.floor(Math.random() * 5) + 21; // 26 because 0 counts
+    const newDate = currentDate + randomTime;
 
-    newDate.setMinutes(currentDate.getMinutes() + randomTime);
     return newDate;
 }
 
 // generate many (500) random product function
 function generateManyRandomProduct(num) {
     const arr = [];
-    let date = new Date();
+    let date = Date.now();
 
     for (let i = 0; i < num; i++) {
         arr.push(generateRandomProduct(date));
@@ -80,7 +77,8 @@ function generateManyRandomProduct(num) {
 document.addEventListener("DOMContentLoaded", function (event) {
     // when button1 is clicked
     document.getElementById("button1").addEventListener("click", function () {
-        const randomProduct = generateRandomProduct();
+        let date = Date.now();
+        const randomProduct = generateRandomProduct(date);
 
         document.getElementById("storeID").innerHTML = randomProduct.storeID;
         document.getElementById("salesPersonID").innerHTML = randomProduct.salesPersonID;
@@ -91,9 +89,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     // when button2 is clicked
     document.getElementById("button2").addEventListener("click", function () {
-        const orderObject = generateRandomProduct();
+        let date = Date.now();
+        const orderObject = generateRandomProduct(date);
 
-        fetch('/order', {
+        fetch('/SubmitOne', {
             method: "POST",
             body: JSON.stringify(orderObject),
             headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -107,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("button3").addEventListener("click", function () {
         const orderObject = generateManyRandomProduct(500);
 
-        fetch('/order', {
+        fetch('/Submit500', {
             method: "POST",
             body: JSON.stringify(orderObject),
             headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -117,25 +116,3 @@ document.addEventListener("DOMContentLoaded", function (event) {
         .catch(err=>console.log(err));
     });   
 });
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.sendFile(path.join(`${__dirname}/../public/index.html`));
-  });
-  
-  router.post('/Create', function(req, res) {
-    let order = CreateRandomOrder(new Date());
-    console.log(order);
-  
-  });
-  
-  router.post('/SubmitOne', function(req, res) {
-    console.log(req.body);
-  });
-  
-  router.post('/Submit500', function(req, res) {
-    let data = JSON.stringify(req.body);
-    fs.writeFileSync('entries.json', data);
-  });
-  
-  module.exports = router;
