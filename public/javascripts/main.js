@@ -55,7 +55,7 @@ function generateRandomProduct(date) {
 
 // date + 5 to 30 minutes requirement 
 function Sum(currentDate) {
-    const randomTime = Math.floor(Math.random() * 5) + 21; // 26 because 0 counts
+    const randomTime = Math.floor(Math.random() * 5) + 26; // 26 because 0 counts
     const newDate = currentDate + randomTime;
 
     return newDate;
