@@ -1,3 +1,4 @@
+
 const cdObject = function (pStoreID, pSalesPersonID, pCdID, pPricePaid, pDate) {
     this.storeID = pStoreID;
     this.salesPersonID = pSalesPersonID;
@@ -114,5 +115,32 @@ document.addEventListener("DOMContentLoaded", function (event) {
         .then(response=>response.json())
         .then(json=>console.log(json))
         .catch(err=>console.log(err));
-    });   
+    }); 
+    
+    document.getElementById("button4").addEventListener("click", function () {
+
+    });
+
+    function createQuery2List(responseData) {
+        let ol = document.getElementById("query2List");
+
+        while(ol.firstChild) {
+            ol.removeChild(ol.firstChild);
+        }
+
+        responseData.forEach(element => {
+            let li = document.createElement('li');
+        li.innerHTML = "cdID:   " + element._id + "   sum:   " + element.count;
+            ol.appendChild(li);
+        });
+    }
+
+    document.getElementById("button5").addEventListener("click", function () {
+
+        fetch('/FilterData2')
+        .then(response => response.json())
+        .then(responseData => createQuery2List(responseData))
+        .catch(err => console.log("request not successful error: ", err));
+
+    });
 });

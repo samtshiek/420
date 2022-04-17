@@ -59,6 +59,29 @@ router.post('/Submit500', function(req, res) {
 
 });
 
+router.get('/FilterData1', function(req, res) {
+  
+  res.status(200).json(cdProductArray);
+});
+
+router.get('/FilterData2', function(req, res) {
+  cdSchema.aggregate([
+    //{ $match : { cdID: 123456}},
+    {$group: {_id: "$cdID", count: { $sum: "$pricePaid"}}}
+  ])
+
+  .sort('-count')
+
+  .exec(function (err, storeRanking) {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    console.log(storeRanking);
+    res.status(200).json(storeRanking);
+  })
+});
+
 //SAVE TO FILE
 /*router.post('/Submit500', function(req, res) {
   cdProductArray = req.body;
