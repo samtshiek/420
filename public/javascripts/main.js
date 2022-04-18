@@ -121,6 +121,32 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     });
 
+    // query 1
+    function createQuery1List(responseData) {
+        let ol = document.getElementById("query1List");
+
+        while(ol.firstChild) {
+            ol.removeChild(ol.firstChild);
+        }
+
+        responseData.forEach(element => {
+            let li = document.createElement('li');
+        li.innerHTML = "storeID:   " + element._id + "   sum:   " + element.count;
+            ol.appendChild(li);
+        });
+    }
+
+    // button 4 (query 1)
+    document.getElementById("button4").addEventListener("click", function () {
+
+        fetch('/FilterData1')
+        .then(response => response.json())
+        .then(responseData => createQuery1List(responseData))
+        .catch(err => console.log("request not successful error: ", err));
+
+    });
+
+    // query 2    
     function createQuery2List(responseData) {
         let ol = document.getElementById("query2List");
 
@@ -135,6 +161,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
     }
 
+    // button 5 (query 2)
     document.getElementById("button5").addEventListener("click", function () {
 
         fetch('/FilterData2')
