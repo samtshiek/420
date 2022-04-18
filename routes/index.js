@@ -7,7 +7,8 @@ const mongoose = require("mongoose");
 const cdSchema = require("../cdSchema");
 
 const dbURI =
-"mongodb+srv://Rocks:Rock@sam-cluster0.mcrbf.mongodb.net/CdDB?retryWrites=true&w=majority";
+"mongodb+srv://BCstudent:Hawaii@luizacluster.kgcpu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+//"mongodb+srv://Rocks:Rock@sam-cluster0.mcrbf.mongodb.net/CdDB?retryWrites=true&w=majority";
 
 //Make Mongoose use findOneAndUpdate()
 mongoose.set('useFindAndModify', false);
@@ -60,8 +61,20 @@ router.post('/Submit500', function(req, res) {
 });
 
 router.get('/FilterData1', function(req, res) {
-  
-  res.status(200).json(cdProductArray);
+  cdSchema.aggregate([
+    {$group: {_id: "$storeID", count: { $sum: "$pricePaid"}}}
+  ])
+
+  .sort('count')
+
+  .exec(function (err, storeRanking) {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    console.log(storeRanking);
+    res.status(200).json(storeRanking);
+  })
 });
 
 router.get('/FilterData2', function(req, res) {
